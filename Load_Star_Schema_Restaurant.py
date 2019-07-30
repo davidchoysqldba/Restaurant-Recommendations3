@@ -17,7 +17,8 @@ def PassInPathAndRun():
 
     return args.data_path, args.data_path_bq
 
-data_path, data_path_bq = PassInPathAndRun()
+if __name__ == '__main__':
+    data_path, data_path_bq = PassInPathAndRun()
 
 # if data_path == None or data_path_bq == None:
 #     sc.stop()
@@ -197,7 +198,7 @@ def create_business_cuisine_similarity_join(df_business_latest):
 
     df_bc1 = df_business_cuisine.alias('df_bc1')
 
-    df_bc2 = df_business_cuisine.alias('dfAddress_bc2')
+    df_bc2 = df_business_cuisine.alias('df_bc2')
 
     df_bc_join = df_bc1.join(df_bc2, (df_bc1['zipcode'] == df_bc2['zipcode']) & (df_bc1['camis'] != df_bc2['camis']) )
 
