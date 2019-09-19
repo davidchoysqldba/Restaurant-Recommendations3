@@ -11,20 +11,20 @@ default_args = {
     'owner': 'developer',
     'depends_on_past': True,
     'start_date': datetime(2014, 12, 3),
-    'path_name': '/home/developer/dev-labs/python-dev/data/data',
+    'path_name': '',
     'pattern_name': 'restaurant_data*json',
-    'download_url': 'https://data.cityofnewyork.us/resource/9w7m-hzhe.json?inspection_date=',
+    'download_url': '',
     'email': ['developer@gmail.com'],
-    'google_project_id': 'adroit-resolver-221701',
-    'google_bucket_name': 'rest_pipeline_2018',
-    'google_sub_path': 'data/in_gcp',
+    'google_project_id': '',
+    'google_bucket_name': '',
+    'google_sub_path': '',
     'email_on_failure': False,
     'email_on_retry': False,
-    'spark_job': 'pyspark gs://rest_pipeline_2018/script/Load_Star_Schema_Restaurant.py',
+    'spark_job': 'pyspark gs://gcp_stoage/script/Load_Star_Schema_Restaurant.py',
     'region_name': 'us-east1',
     'cluster_name' : 'dataproc-pipeline',
-    'data_path' : 'gs://rest_pipeline_2018/data/in_gcp',
-    'data_path_bq' : 'gs://rest_pipeline_2018/data/to_bq'
+    'data_path' : 'gs://gcp_storage/data/in_gcp',
+    'data_path_bq' : 'gs://gcp_storage/data/to_bq'
     }
 
 def process_file_in_gcp(**context):
@@ -47,5 +47,3 @@ t2 = BashOperator(
     dag=dag)
 
 t1 >> t2
-
-# gcloud dataproc jobs submit pyspark gs://rest_pipeline_2018/script/Load_Star_Schema_Restaurant.py --region=us-east1 --cluster=dataproc-pipeline -- -data_path=gs://rest_pipeline_2018/data/in_gcp -data_path_bq=gs://rest_pipeline_2018/data/to_bq
